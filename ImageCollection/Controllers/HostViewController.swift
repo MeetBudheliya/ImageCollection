@@ -25,6 +25,15 @@ import InteractiveSideMenu
  Responsible for creating and selecting menu items content controlers.
  Has opportunity to show/hide side menu.
  */
+import UIKit
+import InteractiveSideMenu
+
+/**
+ HostViewController is container view controller, contains menu controller and the list of relevant view controllers.
+
+ Responsible for creating and selecting menu items content controlers.
+ Has opportunity to show/hide side menu.
+ */
 class HostViewController: MenuContainerViewController {
 
     override var prefersStatusBarHidden: Bool {
@@ -38,7 +47,8 @@ class HostViewController: MenuContainerViewController {
         self.transitionOptions = TransitionOptions(duration: 0.4, visibleContentWidth: screenSize.width / 6)
 
         // Instantiate menu view controller by identifier
-        self.menuViewController = SampleMenuViewController.storyboardViewController()
+        self.menuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NavigationMenu") as! SampleMenuViewController
+        self.menuViewController.modalPresentationStyle = .fullScreen
 
         // Gather content items controllers
         self.contentViewControllers = contentControllers()
@@ -64,10 +74,10 @@ class HostViewController: MenuContainerViewController {
     }
 
     private func contentControllers() -> [UIViewController] {
-        let kittyController = KittyViewController.storyboardViewController()
-        let tabController = TabBarViewController.storyboardNavigationController()
-        let tweakController = TweakViewController.storyboardNavigationController()
+        let first = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FirstViewController") as! FirstViewController
+        let second = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SecondViewController") as! SecondViewController
+        let third = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ThirdViewController") as! ThirdViewController
 
-        return [kittyController, tabController, tweakController]
+        return [first, second, third]
     }
 }

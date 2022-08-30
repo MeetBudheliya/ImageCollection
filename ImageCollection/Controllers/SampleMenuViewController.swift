@@ -22,7 +22,7 @@ import InteractiveSideMenu
 /**
  Menu controller is responsible for creating its content and showing/hiding menu using 'menuContainerViewController' property.
  */
-class SampleMenuViewController: MenuViewController, Storyboardable {
+class SampleMenuViewController: MenuViewController {
 
     @IBOutlet fileprivate weak var tableView: UITableView!
     @IBOutlet fileprivate weak var avatarImageView: UIImageView!
@@ -84,7 +84,7 @@ extension SampleMenuViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SampleTableCell.self), for: indexPath) as? SampleTableCell else {
             preconditionFailure("Unregistered table view cell")
         }
-        
+
         cell.titleLabel.text = menuContainerViewController?.contentViewControllers[indexPath.row].title ?? "A Controller"
 
         return cell
